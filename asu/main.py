@@ -23,7 +23,7 @@ def build_parser():
     usage = 'usage: %prog [options] [<input> ...]'
     version = '%prog {}'.format(__version__)
     parser = OptionParser(usage=usage, version=version)
-    parser.add_option('-o', '--output',
+    parser.add_option('-o', '--output-dir',
                       action='store', type='string', dest='output_dir',
                       help="output dir for generated screenshots and html "
                            "files")
