@@ -6,9 +6,9 @@ import webbrowser
 
 from optparse import OptionParser
 try:
-    from configparser import RawConfigParser, NoSectionError
+    import configparser
 except ImportError:
-    from ConfigParser import RawConfigParser, NoSectionError
+    import ConfigParser as configparser
 
 from . import (__version__, VALID_INPUT_FILE_EXTENSIONS,
                DEFAULT_SCREENSHOT_AMOUNT)
@@ -153,7 +153,7 @@ def main(arguments=None):
            'image_host': None,
            'browser': False,
            'screenshot_amount': DEFAULT_SCREENSHOT_AMOUNT,
-           'thumbnail_size': None,
+           'thumbnail_size': -1,
            'login': None,
            'show': None,
            'frame_accurate': False,
@@ -170,15 +170,22 @@ def main(arguments=None):
                     expanduser(sep.join(("~", ".asu.cfg"))),
                     sep.join((dirname(dirname(abspath(__file__))), "asu.cfg"))]
 
-    config = RawConfigParser(cfg)
+    config = configparser.RawConfigParser()
     cfgs_read = config.read(cfgfiles)
     if options.config and options.config not in cfgs_read:
         fatal("Failed to read '" + options.config + "' config file")
 
-    try:
+    if cfgs_read:
         cfg.update(config.items('asu'))
-    except NoSectionError:
-        pass
+
+        for key, val_type in (('no_upload', 'getboolean'),
+                              ('browser', 'getboolean'),
+                              ('frame_accurate', 'getboolean'),
+                              ('screenshot_amount', 'getint'),
+                              ('thumbnail_size', 'getint')):
+            print(key, val_type)
+            if config.has_option('asu', key):
+                cfg[key] = getattr(config, val_type)('asu', key)
 
     parse_options(cfg, options.__dict__, args)
 
