@@ -183,7 +183,7 @@ def main(arguments=None):
                               ('frame_accurate', 'getboolean'),
                               ('screenshot_amount', 'getint'),
                               ('thumbnail_size', 'getint')):
-            print(key, val_type)
+
             if config.has_option('asu', key):
                 cfg[key] = getattr(config, val_type)('asu', key)
 
