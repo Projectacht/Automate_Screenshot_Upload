@@ -188,7 +188,7 @@ class HtmlFile(AsuFile):
                 "'width:300px; height:200px;' />\n"
                 "{}\n"
                 "</textarea>\n"
-                "</td>\n".format(name, '\n'.join(links)))
+                "</td>\n".format(name, ' '.join(links)))
 
     @staticmethod
     def _generate_input_box(name, link):
