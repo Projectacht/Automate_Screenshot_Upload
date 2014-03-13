@@ -57,4 +57,4 @@ elif path.isdir(filename):
 else:
     sys.exit('ERROR: \'' + filename + '\' is not a file or a directory.')
 
-run_command(asu_exe, *sys.argv[1:] + input_files)
+run_command('python', *[asu_exe] + sys.argv[1:] + input_files)
