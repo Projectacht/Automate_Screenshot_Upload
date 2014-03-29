@@ -6,7 +6,7 @@ from collections import namedtuple
 from . import (DEFAULT_OUTPUT_FILE_TYPE, DEFAULT_SCREENSHOT_FILE_EXTENSION,
                DEFAULT_FFMPEG_COMMAND)
 from . import markup
-from .utils import qoute_path, run_command, regex_in_string
+from .utils import quote_path, run_command, regex_in_string
 
 Timecode = namedtuple('Timecode', "string, seconds")
 
@@ -50,7 +50,7 @@ class InputFile(AsuFile):
             return self.duration
 
         if 'win32' in sys.platform:
-            path = qoute_path(self.path)
+            path = quote_path(self.path)
         else:
             path = self.path
 
@@ -83,7 +83,7 @@ class InputFile(AsuFile):
 
         args.append('-i')
         if 'win32' in sys.platform:
-            args.append(qoute_path(self.path))
+            args.append(quote_path(self.path))
         else:
             args.append(self.path)
 
@@ -95,7 +95,7 @@ class InputFile(AsuFile):
         if 'win32' in sys.platform:
             if extra_args:
                 args.append(extra_args)
-            args.append(qoute_path(path))
+            args.append(quote_path(path))
         else:
             if extra_args:
                 args += extra_args.split(' ')

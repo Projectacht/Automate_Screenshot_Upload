@@ -18,7 +18,7 @@ def fatal(*args, **kwargs):
     sys.exit(1)
 
 
-def qoute_path(string):
+def quote_path(string):
     if 'win32' in sys.platform:
         return '"' + string + '"'
     else:
