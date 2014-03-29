@@ -5,7 +5,7 @@ import os
 from os import path
 
 from asu import VALID_INPUT_FILE_EXTENSIONS
-from asu.utils import run_command
+from asu.utils import run_command, quote_path
 
 if sys.version_info[0] < 3:
     input = raw_input
@@ -56,6 +56,9 @@ elif path.isdir(filename):
         sys.exit('ERROR: No eligible files found in ' + filename + '.')
 else:
     sys.exit('ERROR: \'' + filename + '\' is not a file or a directory.')
+
+if 'win32' in sys.platform:
+    input_files = [quote_path(file) for file in input_files]
 
 ret, _, _ = run_command('python', *[asu_exe] + sys.argv[1:] + input_files,
                         stdout=None, stderr=None)
