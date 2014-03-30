@@ -37,8 +37,10 @@ def regex_in_string(regex, string):
         return match.group()
 
 
-def run_command(executeable, *args, stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE):
+def run_command(executeable, *args, **kwargs):
+    stdout = kwargs.pop('stdout', subprocess.PIPE)
+    stderr = kwargs.pop('stderr', subprocess.PIPE)
+
     command_input = (executeable,)
     if len(args) > 0:
         if 'win32' in sys.platform:
