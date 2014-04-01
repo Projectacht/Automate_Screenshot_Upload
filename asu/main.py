@@ -267,8 +267,9 @@ def main(arguments=None):
                        'bbcode': markup.to_bbcode}[cfg['show']]
 
         for input_file in input_files:
-            for ss in input_file.screenshots:
-                print(markup_func(ss.page_url, ss.thumbnail_url))
-            print()
+            for ss in input_file.screenshots[:-1]:
+                print(markup_func(ss.page_url, ss.thumbnail_url), end=' ')
+            ss = input_file.screenshots[-1]
+            print(markup_func(ss.page_url, ss.thumbnail_url))
     else:
         print(html_file.path)
