@@ -124,7 +124,7 @@ def parse_options(cfg, options, args):
     elif options['thumbnail_size'] != 0:
         fatal("Commandline argument used with '--thumbnail-size' was not "
               "an allowed size")
-    else:
+    elif not cfg['thumbnail_size']:
         cfg['thumbnail_size'] = host.thumbnail_size
 
     if options['show'] is not None:
@@ -153,7 +153,7 @@ def main(arguments=None):
            'image_host': None,
            'browser': False,
            'screenshot_amount': DEFAULT_SCREENSHOT_AMOUNT,
-           'thumbnail_size': -1,
+           'thumbnail_size': None,
            'login': None,
            'show': None,
            'frame_accurate': False,
