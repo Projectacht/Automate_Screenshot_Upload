@@ -157,7 +157,8 @@ def main(arguments=None):
            'login': None,
            'show': None,
            'frame_accurate': False,
-           'ffmpeg_arg': None}
+           'ffmpeg_arg': None,
+           'delete_screenshots': False}
 
     options, args = build_parser().parse_args()
 
