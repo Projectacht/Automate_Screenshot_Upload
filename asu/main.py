@@ -257,6 +257,10 @@ def main(arguments=None):
 
         html_file.add_section(input_file)
 
+        if cfg['delete_screenshots']:
+            for ss_file in input_file.screenshots:
+                os.remove(ss_file.path)
+
     html_file.write()
 
     if cfg['browser']:
