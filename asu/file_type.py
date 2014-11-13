@@ -57,7 +57,7 @@ class InputFile(AsuFile):
         _, _, stderr = run_command(ffmpeg, '-i', path)
 
         regex = re.compile(r'(?<=(Timecode|Duration):\s)\d\d?:\d\d:\d\d(?=\.)')
-        dur_string = regex_in_string(regex, stderr.decode())
+        dur_string = regex_in_string(regex, stderr.decode("utf-8"))
         if not dur_string:
             return None
 
